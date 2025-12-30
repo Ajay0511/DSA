@@ -2,7 +2,7 @@ class Solution {
     public int nthRoot(int n, int m) {
         // code here
         int low = 0;
-        int high = m;
+        int high = m/n + 1;
         
         while(low<=high){
             int mid = (low+high)/2;
