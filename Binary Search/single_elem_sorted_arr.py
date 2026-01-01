@@ -1,0 +1,15 @@
+"""
+    You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
+    Return the single element that appears only once.
+    Your solution must run in O(log n) time and O(1) space.
+"""
+def singleNonDuplicate(self, nums: List[int]) -> int:
+        low = 0
+        high = len(nums)-1
+        while(low<high):
+            mid = (low+high)//2
+            if((mid%2==0 and nums[mid]==nums[mid+1]) or (mid%2==1 and nums[mid]==nums[mid-1])):
+                low = mid+1
+            else:
+                high = mid
+        return nums[low]
