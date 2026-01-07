@@ -1,4 +1,4 @@
-"""
+/*
 Given the root of a binary tree, split the binary tree into two subtrees by removing one edge such that the product of the sums of the subtrees is maximized.
 
 Return the maximum product of the sums of the two subtrees. Since the answer may be too large, return it modulo 109 + 7.
@@ -25,36 +25,44 @@ Constraints:
 
 The number of nodes in the tree is in the range [2, 5 * 104].
 1 <= Node.val <= 104
-"""
-from typing import Optional
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def maxProduct(self, root: Optional[TreeNode]) -> int:
-        total_sum = 0
-        def dfs(root):
-            nonlocal total_sum
-            if root is None:
-                return 
-            total_sum+=root.val
-            dfs(root.left)
-            dfs(root.right)
-        dfs(root)
-        ans = 0
-        def dfs_mauj(root):
-            nonlocal ans
-            if(root is None):
-                return 0
-            left = dfs_mauj(root.left)
-            right = dfs_mauj(root.right)
-            subtree_sum = root.val + left + right
-            ans = max(ans, (total_sum-subtree_sum)*subtree_sum)
-            return subtree_sum
-        dfs_mauj(root)
-        return ans%((10**9)+7)
+*/
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+class Solution {
+    private long total_sum = 0;
+    private long ans = 0;
+    private static final int MOD = 1_000_000_007;
 
-        
+    public long dfs(TreeNode root) {
+        if (root == null) return 0;
+        return root.val + dfs(root.left) + dfs(root.right);
+    }
+
+    public long dfsMauj(TreeNode root) {
+        if (root == null) return 0;
+
+        long left = dfsMauj(root.left);
+        long right = dfsMauj(root.right);
+
+        long subtreeSum = root.val + left + right;
+        ans = Math.max(ans, (total_sum - subtreeSum) * subtreeSum);
+
+        return subtreeSum;
+    }
+
+    public int maxProduct(TreeNode root) {
+        total_sum = dfs(root);
+        dfsMauj(root);
+        return (int)(ans % MOD);
+    }
+}
