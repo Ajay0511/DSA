@@ -15,8 +15,6 @@ Stack is a data structure that follows the LIFO (Last in First out) principle. D
 
 You have been given ‘m’ operations which you need to perform in the stack. Your task is to implement all the functions of the stack.
 
-
-
 Example:
 We perform the following operations on an empty stack which has capacity 2:
 
