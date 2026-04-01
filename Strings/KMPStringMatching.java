@@ -61,3 +61,56 @@ class Solution {
         return lps;
     }
 }
+
+
+
+/*
+class Solution {
+    
+    int[] calculateLPS(String pattern){
+        int[] lps = new int[pattern.length()];
+        int i = 1;
+        int prevLps = 0;
+        while(i<pattern.length()){
+            if(pattern.charAt(i) == pattern.charAt(prevLps)){
+                lps[i] = 1+prevLps;
+                i+=1;
+                prevLps+=1;
+            } else if(prevLps == 0){
+                lps[i] = 0;
+                i+=1;
+            } else {
+                prevLps = lps[prevLps-1];
+            }
+        }
+        return lps;
+    }
+    
+    ArrayList<Integer> search(String pat, String txt) {
+        // code here
+        int i = 0;
+        int j = 0;
+        int[] lps_arr = calculateLPS(pat);
+        ArrayList<Integer> res = new ArrayList<>();
+        while(i<txt.length()){
+            if(pat.charAt(j) == txt.charAt(i)){
+                i+=1;
+                j+=1;
+            } 
+            if(j==pat.length()){
+                res.add(i-pat.length());
+                j = lps_arr[j-1];
+            }
+            else if(i < txt.length() && pat.charAt(j) != txt.charAt(i)) {
+                if(j == 0){
+                    i+=1;
+                } else{
+                    j = lps_arr[j-1];
+                }
+            }
+        }
+        return res;
+        
+    }
+}
+*/
