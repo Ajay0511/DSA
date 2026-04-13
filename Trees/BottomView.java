@@ -71,7 +71,12 @@ class Solution {
 }
 */
 
-/*
+import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 class Node {
     int data;
     Node left;
@@ -83,10 +88,7 @@ class Node {
         right = null;
     }
 }
-*/
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.LinkedList;
+
 
 class Pair{
     Node nd;
