@@ -23,27 +23,14 @@ Constraints:
 The number of nodes in the tree is in the range [0, 2000].
 -1000 <= Node.val <= 1000
 """
+def helper(node, level):
+            if not node:
+                return
+            res[level].append(node.val)
+            helper(node.left, level + 1)
+            helper(node.right, level + 1)
 
-def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if not root:
-            return []
-        
-        result = []
-        queue = deque([root])
-        
-        while queue:
-            level_size = len(queue)
-            level_nodes = []
-            
-            for _ in range(level_size):
-                node = queue.popleft()  # Remove front node
-                level_nodes.append(node.val)
+        helper(root, 0)
 
-                if node.left:
-                    queue.append(node.left)  # Add left child to queue
-                if node.right:
-                    queue.append(node.right)  # Add right child to queue
-            
-            result.append(level_nodes)
-        
-        return result
+        # Convert to a list, reversing every alternate level for zigzag order
+        return [vals if i % 2 == 0 else vals[::-1] for i, vals in sorted(res.items())]
